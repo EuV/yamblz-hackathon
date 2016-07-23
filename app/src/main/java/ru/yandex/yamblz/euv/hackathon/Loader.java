@@ -10,13 +10,15 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import ru.yandex.yamblz.euv.hackathon.db.DBHelper;
 import ru.yandex.yamblz.euv.hackathon.db.WordsContract.Words;
 import ru.yandex.yamblz.euv.hackathon.model.Lang;
@@ -26,6 +28,10 @@ import ru.yandex.yamblz.euv.hackathon.model.WordsJson;
 
 public final class Loader extends HandlerThread {
     private static final String TAG = Loader.class.getSimpleName();
+
+    private static final String DICT_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=";
+    private static final String KEY = "dict.1.1.20160723T050058Z.18bf19c4d511f5b5.80d0117c9945c9ee88f1f16c16fac27c3ac105c5";
+
 
     private static Loader loaderInstance;
 
@@ -94,11 +100,14 @@ public final class Loader extends HandlerThread {
         SQLiteDatabase dbw = new DBHelper(App.getContext()).getWritableDatabase();
 
         for (String wordStr : words) {
-            Word word = loadWord(dbr, wordStr);
+            Word word = loadDbWord(dbr, wordStr);
             Log.d(TAG, "Loaded from DB word '" + wordStr + "': " + word);
 
             if (word == null) {
                 saveWord(dbw, new Word(-1, wordStr, lang, 0));
+
+                String translation = loadWebTranslation(wordStr, lang);
+                // TODO: Save into DB
             }
         }
 
@@ -107,7 +116,7 @@ public final class Loader extends HandlerThread {
     }
 
 
-    private Word loadWord(SQLiteDatabase db, String wordStr) {
+    private Word loadDbWord(SQLiteDatabase db, String wordStr) {
         Word word = null;
         String selection = Words.WORD + " = '" + wordStr + "'";
         Cursor cursor = db.query(Words.TABLE_NAME, Words.PROJECTION, selection, null, null, null, null);
@@ -141,6 +150,34 @@ public final class Loader extends HandlerThread {
         val.put(Words.PROGRESS, word.progress);
 
         db.insertWithOnConflict(Words.TABLE_NAME, null, val, SQLiteDatabase.CONFLICT_IGNORE);
+    }
+
+
+    private String loadWebTranslation(String word, Lang lang) {
+        String langParam = (lang == Lang.RU) ? "ru-en" : "en-ru";
+        String url = DICT_URL + KEY + "&lang=" + langParam + "&text=" + word;
+
+        String rawData = null;
+        try {
+            Request request = new Request.Builder().url(url).build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                rawData = response.body().string();
+            }
+        } catch (IOException e) {
+            Log.d(TAG, "Failed to receive data from the server", e);
+            return null;
+        }
+
+        String translation = null;
+        try {
+            translation = JSON.parseObject(rawData).getJSONArray("def").getJSONObject(0).getJSONArray("tr").getJSONObject(0).getString("text");
+            Log.d(TAG, translation);
+        } catch (Exception e) {
+            Log.d(TAG, "Failed to parse JSON string", e);
+        }
+
+        return translation;
     }
 
 
