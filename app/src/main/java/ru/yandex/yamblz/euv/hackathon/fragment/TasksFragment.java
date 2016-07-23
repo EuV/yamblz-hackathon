@@ -11,14 +11,17 @@ import android.widget.ImageView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
 import ru.yandex.yamblz.euv.hackathon.R;
-import ru.yandex.yamblz.euv.hackathon.views.StatChart;
+import ru.yandex.yamblz.euv.hackathon.TrainingType;
 
-/**
- * Created by user on 7/23/16.
- */
 public class TasksFragment extends Fragment {
     ImageView close,skip;
     RoundCornerProgressBar progressBar;
+    TrainingType trainingType;
+    private TrainingFragment currentTrainingFragment;
+
+    public TasksFragment(){
+        super();
+    }
 
     @Nullable
     @Override
@@ -33,26 +36,44 @@ public class TasksFragment extends Fragment {
         skip= (ImageView) view.findViewById(R.id.skip_btn);
         progressBar= (RoundCornerProgressBar) view.findViewById(R.id.progress_bar);
         skip.setOnClickListener(view1 -> {
+            skip();
         });
-        ((ViewGroup)view).addView(new StatChart(getContext()));
+        close.setOnClickListener(view1 -> {
+            close();
+        });
+        if(trainingType==TrainingType.training_cards){
+            currentTrainingFragment=new TrainingCardsFragment();
+            currentTrainingFragment.setTasksFragment(this);
+            getChildFragmentManager().beginTransaction().replace(R.id.container,currentTrainingFragment).commit();
+        }else{
+            currentTrainingFragment=new TrainingMatchingFragment();
+            currentTrainingFragment.setTasksFragment(this);
+            getChildFragmentManager().beginTransaction().replace(R.id.container,currentTrainingFragment).commit();
+        }
+       // ((ViewGroup)view).addView(new StatChart(getContext()));
     }
 
     public void close(){
-
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MainFragment()).commit();
     }
-    public void showNext(){
+    public void updateProgress(){
         if(progressBar.getProgress()==1){
             finish();
         }else{
             progressBar.setProgress(progressBar.getProgress()+0.1f);
-            //show next
         }
 
 
     }
     public void skip(){
+        currentTrainingFragment.skip();
     }
     private void finish(){
-
+        getChildFragmentManager().beginTransaction().replace(R.id.container,new StatFragment()).commit();
     }
+
+    public void setTrainingType(TrainingType trainingType) {
+        this.trainingType = trainingType;
+    }
+
 }

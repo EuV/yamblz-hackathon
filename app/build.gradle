@@ -40,4 +40,5 @@ dependencies {
     compile 'com.yandex.android:speechkit:2.5.0'
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
+    compile 'com.daprlabs.aaron:cardstack:0.3.0'
 }

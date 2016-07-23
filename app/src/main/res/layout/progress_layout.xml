@@ -18,7 +18,7 @@
         android:layout_width="250dp"
         android:layout_height="8dp"
         android:layout_gravity="center"
-        app:rcProgress="0.4"
+        app:rcProgress="0.1"
         app:rcSecondaryProgress="0"
         app:rcMax="1"
         app:rcRadius="30dp"

@@ -1,10 +1,10 @@
 package ru.yandex.yamblz.euv.hackathon.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import ru.yandex.yamblz.euv.hackathon.fragment.MainFragment;
 import ru.yandex.yamblz.euv.hackathon.R;
+import ru.yandex.yamblz.euv.hackathon.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, MainFragment.newInstance())
+                .replace(R.id.fragment_container, MainFragment.newInstance())
                 .commit();
     }
 }
