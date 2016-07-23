@@ -2,6 +2,7 @@ package ru.yandex.yamblz.euv.hackathon.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,10 @@ public class TrainingMatchingFragment extends TrainingFragment {
         data2.add("one");
         data2.add("one");
         left= (RecyclerView) view.findViewById(R.id.rv_left);
+        left.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         left.setAdapter(new WordsAdapter(data));
         right= (RecyclerView) view.findViewById(R.id.rv_right);
+        right.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         right.setAdapter(new WordsAdapter(data2));
     }
 

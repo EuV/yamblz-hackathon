@@ -3,16 +3,16 @@
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_left"
         android:layout_marginRight="8dp"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_right"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

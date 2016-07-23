@@ -25,7 +25,7 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.MyViewHolder
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.training_card_layout, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.word_card_layout, parent, false));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.MyViewHolder
         public TextView textView;
         public MyViewHolder(View itemView) {
             super(itemView);
-            textView.findViewById(R.id.card_text);
+            textView= (TextView) itemView.findViewById(R.id.word_text);
         }
 
         public void bind(String text){
