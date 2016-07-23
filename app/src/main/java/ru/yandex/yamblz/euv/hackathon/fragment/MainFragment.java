@@ -40,13 +40,5 @@ public class MainFragment extends Fragment {
                     .setCustomAnimations(fade_in, fade_out,fade_in,fade_out)
                     .replace(R.id.fragment_container,tasksFragment).commit();
         });
-        card= (CardView) view.findViewById(R.id.training_matching);
-        card.setOnClickListener(view1->{
-            TasksFragment tasksFragment=new TasksFragment();
-            tasksFragment.setTrainingType(TrainingType.training_matching);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(fade_in, fade_out,fade_in,fade_out)
-                    .replace(R.id.fragment_container,tasksFragment).commit();
-        });
     }
 }
