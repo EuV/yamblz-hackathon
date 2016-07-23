@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="?attr/actionBarSize">
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/icn_close_active"
+        android:layout_gravity="center"/>
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_marginLeft="21dp"
+        android:layout_width="250dp"
+        android:layout_height="8dp"
+        android:layout_gravity="center"
+        app:rcProgress="0.4"
+        app:rcSecondaryProgress="0"
+        app:rcMax="1"
+        app:rcRadius="30dp"
+        app:rcBackgroundPadding="0dp"
+        app:rcProgressColor="@color/progress_on"
+        app:rcBackgroundColor="@color/progress_under"/>
+
+    <ImageView
+        android:id="@+id/skip_btn"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/icn_skip_next_active"
+        android:layout_gravity="center"/>
+</LinearLayout>
