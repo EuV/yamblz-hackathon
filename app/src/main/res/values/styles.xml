@@ -50,4 +50,8 @@
 
     </style>
 
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#ffdd60</item>
+    </style>
+
 </resources>

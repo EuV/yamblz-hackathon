@@ -3,6 +3,7 @@ package ru.yandex.yamblz.euv.hackathon.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
 import ru.yandex.yamblz.euv.hackathon.R;
 import ru.yandex.yamblz.euv.hackathon.TrainingType;
+
+import static android.R.anim.fade_in;
+import static android.R.anim.fade_out;
 
 public class TasksFragment extends Fragment {
     ImageView close,skip;
@@ -29,9 +33,11 @@ public class TasksFragment extends Fragment {
         return inflater.inflate(R.layout.tasks_fragment, container, false);
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         close= (ImageView) view.findViewById(R.id.close_btn);
         skip= (ImageView) view.findViewById(R.id.skip_btn);
         progressBar= (RoundCornerProgressBar) view.findViewById(R.id.progress_bar);
@@ -44,17 +50,17 @@ public class TasksFragment extends Fragment {
         if(trainingType==TrainingType.training_cards){
             currentTrainingFragment=new TrainingCardsFragment();
             currentTrainingFragment.setTasksFragment(this);
-            getChildFragmentManager().beginTransaction().replace(R.id.container,currentTrainingFragment).commit();
+            getChildFragmentManager().beginTransaction().setCustomAnimations(fade_in, fade_out,fade_in,fade_out).replace(R.id.container,currentTrainingFragment).commit();
         }else{
             currentTrainingFragment=new TrainingMatchingFragment();
             currentTrainingFragment.setTasksFragment(this);
-            getChildFragmentManager().beginTransaction().replace(R.id.container,currentTrainingFragment).commit();
+            getChildFragmentManager().beginTransaction().setCustomAnimations(fade_in, fade_out,fade_in,fade_out).replace(R.id.container,currentTrainingFragment).commit();
         }
        // ((ViewGroup)view).addView(new StatChart(getContext()));
     }
 
     public void close(){
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new MainFragment()).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(fade_in, fade_out,fade_in,fade_out).replace(R.id.fragment_container,new MainFragment()).commit();
     }
     public void updateProgress(){
         if(progressBar.getProgress()==1){
