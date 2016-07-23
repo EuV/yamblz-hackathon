@@ -38,6 +38,13 @@
             android:text="Large Text"
             android:id="@+id/card_text"
             android:layout_centerInParent="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/card_text_trans"
+            android:layout_centerInParent="true" />
         <Button
             android:id="@+id/btn_speak"
             android:layout_width="22dp"

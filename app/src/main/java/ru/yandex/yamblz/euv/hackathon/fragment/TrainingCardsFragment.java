@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import com.daprlabs.cardstack.SwipeDeck;
 
+import java.util.List;
+
+import ru.yandex.yamblz.euv.hackathon.Loader;
 import ru.yandex.yamblz.euv.hackathon.R;
 import ru.yandex.yamblz.euv.hackathon.adapters.SwipeDeckAdapter;
 
@@ -23,36 +26,40 @@ public class TrainingCardsFragment extends TrainingFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeDeck= (SwipeDeck) view.findViewById(R.id.swipe_deck);
-        swipeDeck.setAdapter(new SwipeDeckAdapter(getContext()));
-        swipeDeck.setLeftImage(R.id.btn_false);
-        swipeDeck.setRightImage(R.id.btn_true);
-        swipeDeck.setEventCallback(new SwipeDeck.SwipeEventCallback() {
+        Loader.getInstance().loadTrainingWords(new Loader.LoaderCallback() {
             @Override
-            public void cardSwipedLeft(int position) {
-                tasksFragment.updateProgress();
-            }
+            public void trainingWordsLoaded(List<String> from, List<String> to) {
+                swipeDeck.setAdapter(new SwipeDeckAdapter(getContext(),from,to));
+                swipeDeck.setLeftImage(R.id.btn_false);
+                swipeDeck.setRightImage(R.id.btn_true);
+                swipeDeck.setEventCallback(new SwipeDeck.SwipeEventCallback() {
+                    @Override
+                    public void cardSwipedLeft(int position) {
+                        tasksFragment.updateProgress();
+                    }
 
-            @Override
-            public void cardSwipedRight(int position) {
-                tasksFragment.updateProgress();
-            }
+                    @Override
+                    public void cardSwipedRight(int position) {
+                        tasksFragment.updateProgress();
+                    }
 
-            @Override
-            public void cardsDepleted() {
+                    @Override
+                    public void cardsDepleted() {
 
-            }
+                    }
 
-            @Override
-            public void cardActionDown() {
+                    @Override
+                    public void cardActionDown() {
 
-            }
+                    }
 
-            @Override
-            public void cardActionUp() {
+                    @Override
+                    public void cardActionUp() {
 
+                    }
+                });
             }
         });
-
     }
 
     @Override
