@@ -72,7 +72,7 @@ public final class Loader extends HandlerThread {
 
         List<String> from = Arrays.asList("дом", "собака", "кот", "машина", "стена", "урон", "мышь", "страдание", "боль", "смерть");
         List<String> to = Arrays.asList("house", "dog", "cat", "car", "wall", "damage", "mouse", "suffering", "pain", "death");
-        callback.trainingWordsLoaded(from, to);
+        App.runOnUiThread(() -> callback.trainingWordsLoaded(from, to));
     }
 
 
