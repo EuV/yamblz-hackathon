@@ -44,10 +44,20 @@ public class TrainingMatchingFragment extends TrainingFragment {
         data2.add("one");
         left= (RecyclerView) view.findViewById(R.id.rv_left);
         left.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        left.setAdapter(new WordsAdapter(data));
+        left.setAdapter(new WordsAdapter(data, new ClickCallback() {
+            @Override
+            public void clicked(String word) {
+
+            }
+        }));
         right= (RecyclerView) view.findViewById(R.id.rv_right);
         right.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        right.setAdapter(new WordsAdapter(data2));
+        right.setAdapter(new WordsAdapter(data2, new ClickCallback() {
+            @Override
+            public void clicked(String word) {
+
+            }
+        }));
     }
 
 
@@ -55,5 +65,9 @@ public class TrainingMatchingFragment extends TrainingFragment {
     @Override
     public void skip() {
         super.skip();
+    }
+
+    public interface ClickCallback{
+        void clicked(String word);
     }
 }

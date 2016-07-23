@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ru.yandex.yamblz.euv.hackathon.R;
+import ru.yandex.yamblz.euv.hackathon.fragment.TrainingMatchingFragment;
 
 /**
  * Created by user on 7/23/16.
@@ -17,15 +18,18 @@ import ru.yandex.yamblz.euv.hackathon.R;
 public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.MyViewHolder>{
 
     private List<String> data;
+    private TrainingMatchingFragment.ClickCallback clickCallback;
     private Context context;
 
-    public WordsAdapter(List<String> data){
+    public WordsAdapter(List<String> data, TrainingMatchingFragment.ClickCallback clickCallback){
         this.data = data;
+        this.clickCallback = clickCallback;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.word_card_layout, parent, false));
+        return new MyViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.word_card_layout, parent, false),clickCallback);
     }
 
     @Override
@@ -40,9 +44,15 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.MyViewHolder
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
-        public MyViewHolder(View itemView) {
+        private TrainingMatchingFragment.ClickCallback clickCallback;
+
+        public MyViewHolder(View itemView, TrainingMatchingFragment.ClickCallback clickCallback) {
             super(itemView);
+            this.clickCallback = clickCallback;
             textView= (TextView) itemView.findViewById(R.id.word_text);
+            itemView.setOnClickListener(view -> {
+                clickCallback.clicked((String) textView.getText());
+            });
         }
 
         public void bind(String text){
