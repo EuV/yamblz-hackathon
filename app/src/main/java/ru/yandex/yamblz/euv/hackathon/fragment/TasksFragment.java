@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
 import ru.yandex.yamblz.euv.hackathon.R;
+import ru.yandex.yamblz.euv.hackathon.views.StatChart;
 
 /**
  * Created by user on 7/23/16.
@@ -33,6 +34,7 @@ public class TasksFragment extends Fragment {
         progressBar= (RoundCornerProgressBar) view.findViewById(R.id.progress_bar);
         skip.setOnClickListener(view1 -> {
         });
+        ((ViewGroup)view).addView(new StatChart(getContext()));
     }
 
     public void close(){
