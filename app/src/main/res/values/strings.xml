@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">yamblz-hackathon</string>
+
+    <string name="label_training_fast">БЫСТРАЯ ТРЕНИРОВКА</string>
+    <string name="label_training_cards">КАРТОЧКИ</string>
+    <string name="label_training_pronunciation">ПРОГОВАРИВАНИЕ СЛОВ</string>
+    <string name="label_training_listening">СЛОВО НА СЛУХ</string>
+    <string name="label_training_matching">ПОИСК ПАРЫ</string>
+    <string name="label_training_composition">СОСТАВЛЕНИЕ СЛОВА</string>
+    <string name="label_training_true_false">ВЕРНО — НЕВЕРНО</string>
+    <string name="label_training_choose_translation">ВЫБОР ПЕРЕВОДА</string>
+    <string name="label_training_image_translation">ПЕРЕВОД ПО КАРТИНКЕ</string>
 </resources>

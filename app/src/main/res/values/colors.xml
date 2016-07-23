@@ -16,6 +16,8 @@
     <color name="accent_700">#ffab00</color>
 
     <color name="black_12">#1e000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_30">#4c000000</color>
     <color name="black_38">#60000000</color>
     <color name="black_54">#89000000</color>
     <color name="black_87">#dd000000</color>
@@ -36,4 +38,7 @@
 
     <color name="progress_on">#ffdd60</color>
     <color name="progress_under">#ffffff</color>
+
+    <color name="background">#fafafa</color>
+    <color name="text">#222222</color>
 </resources>
