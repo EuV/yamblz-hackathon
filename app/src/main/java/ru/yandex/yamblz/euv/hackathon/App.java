@@ -15,6 +15,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // Так делать нельзя. По идее все, что не специфицировано доками, нельзя использовать.
+        // И помните, что реализация фреймворка на девайсах может отличаться, так что не ровен час
+        // приложения откажется запускаться на каком-нибудь xiaomi.
         uiThread = Thread.currentThread();
         context = getApplicationContext();
         handler = new Handler(context.getMainLooper());
@@ -29,6 +32,7 @@ public class App extends Application {
 
 
     public static void runOnUiThread(Runnable action) {
+        // context.getMainLooper().isCurrentThread()
         if (Thread.currentThread() == uiThread) {
             action.run();
         } else {

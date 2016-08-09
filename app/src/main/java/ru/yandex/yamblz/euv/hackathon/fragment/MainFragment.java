@@ -36,6 +36,10 @@ public class MainFragment extends Fragment {
         card.setOnClickListener(view1->{
             TasksFragment tasksFragment=new TasksFragment();
             tasksFragment.setTrainingType(TrainingType.training_cards);
+            // Лучше не позволять фрагменту рулить хостом, а инкапсулировать навигацию через какой-нибудь
+            // интерфейс, который фрагмент получает и запрашивает через него показ экрана. Обычно активити
+            // и реализует этот интерфейс, а фрагмент получает его в onAttach, проверяет
+            // instanceof'ом (падает в случае чего с вменяемым сообщением, fail-fast) и кастит
             getActivity().getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(fade_in, fade_out,fade_in,fade_out)
                     .replace(R.id.fragment_container,tasksFragment).commit();

@@ -4,6 +4,7 @@ public class Word {
     public final int id;
     public final String word;
     public final Lang lang;
+    // Final отклеился
     public int progress;
 
     public Word(int id, String word, Lang lang, int progress) {
