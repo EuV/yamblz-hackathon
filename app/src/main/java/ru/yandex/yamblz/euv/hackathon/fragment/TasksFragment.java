@@ -17,6 +17,12 @@ import ru.yandex.yamblz.euv.hackathon.TrainingType;
 import static android.R.anim.fade_in;
 import static android.R.anim.fade_out;
 
+// Package-private не должен быть дефолтной опцией, даже когда пишешь со спешкой
+// То же касается public'ов. Это становится частью публичного API класса, можно подумать,
+// что их следует использовать извне. С широким публичным API намного сложнее поддерживать
+// класс, так что обычно следует стараться поставить private (а вдобавок еще и final) там,
+// где только возможно.
+
 public class TasksFragment extends Fragment {
     ImageView close,skip;
     RoundCornerProgressBar progressBar;
